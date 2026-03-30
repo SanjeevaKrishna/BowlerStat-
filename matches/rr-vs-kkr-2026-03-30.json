@@ -1,0 +1,69 @@
+{
+  "matchId": "rr-vs-kkr-2026-03-30",
+  "status": "completed",
+  "team1": "RR",
+  "team2": "KKR",
+  "venue": "Narendra Modi Stadium",
+  "date": "2026-03-30",
+  "result": "RR WON BY 25 RUNS",
+  "innings": [
+    {
+      "battingTeam": "KKR",
+      "bowlingTeam": "RR",
+      "totalRuns": 120,
+      "wickets": 7,
+      "commentary": "Write your commentary here. Describe how the bowling went, who was economical, who was expensive and what the key moments were.",
+      "overs": [
+        { "over": 1,  "runs": 10, "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 2,  "runs": 8,  "wickets": 1, "bowler": "Krunal Pandya" },
+        { "over": 3,  "runs": 12, "wickets": 0, "bowler": "Hazlewood" },
+        { "over": 4,  "runs": 6,  "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 5,  "runs": 9,  "wickets": 1, "bowler": "Krunal Pandya" },
+        { "over": 6,  "runs": 14, "wickets": 0, "bowler": "Hazlewood" },
+        { "over": 7,  "runs": 8,  "wickets": 0, "bowler": "Swapnil Singh" },
+        { "over": 8,  "runs": 7,  "wickets": 1, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 9,  "runs": 11, "wickets": 0, "bowler": "Krunal Pandya" },
+        { "over": 10, "runs": 9,  "wickets": 0, "bowler": "Hazlewood" },
+        { "over": 11, "runs": 8,  "wickets": 1, "bowler": "Swapnil Singh" },
+        { "over": 12, "runs": 10, "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 13, "runs": 7,  "wickets": 0, "bowler": "Krunal Pandya" },
+        { "over": 14, "runs": 12, "wickets": 1, "bowler": "Hazlewood" },
+        { "over": 15, "runs": 9,  "wickets": 0, "bowler": "Swapnil Singh" },
+        { "over": 16, "runs": 11, "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 17, "runs": 8,  "wickets": 1, "bowler": "Krunal Pandya" },
+        { "over": 18, "runs": 14, "wickets": 0, "bowler": "Hazlewood" },
+        { "over": 19, "runs": 9,  "wickets": 1, "bowler": "Swapnil Singh" },
+        { "over": 20, "runs": 13, "wickets": 1, "bowler": "Bhuvneshwar Kumar" }
+      ]
+    },
+    {
+      "battingTeam": "RR",
+      "bowlingTeam": "KKR",
+      "totalRuns": 185,
+      "wickets": 5,
+      "commentary": "Write 2nd innings commentary here.",
+      "overs": [
+        { "over": 1,  "runs": 12, "wickets": 1, "bowler": "Deepak Chahar" },
+        { "over": 2,  "runs": 10, "wickets": 0, "bowler": "Ravindra Jadeja" },
+        { "over": 3,  "runs": 8,  "wickets": 0, "bowler": "Matheesha Pathirana" },
+        { "over": 4,  "runs": 9,  "wickets": 0, "bowler": "Deepak Chahar" },
+        { "over": 5,  "runs": 11, "wickets": 1, "bowler": "Ravindra Jadeja" },
+        { "over": 6,  "runs": 15, "wickets": 0, "bowler": "Matheesha Pathirana" },
+        { "over": 7,  "runs": 8,  "wickets": 0, "bowler": "Deepak Chahar" },
+        { "over": 8,  "runs": 7,  "wickets": 1, "bowler": "Ravindra Jadeja" },
+        { "over": 9,  "runs": 10, "wickets": 0, "bowler": "Matheesha Pathirana" },
+        { "over": 10, "runs": 9,  "wickets": 0, "bowler": "Deepak Chahar" },
+        { "over": 11, "runs": 8,  "wickets": 0, "bowler": "Ravindra Jadeja" },
+        { "over": 12, "runs": 12, "wickets": 1, "bowler": "Matheesha Pathirana" },
+        { "over": 13, "runs": 9,  "wickets": 0, "bowler": "Deepak Chahar" },
+        { "over": 14, "runs": 11, "wickets": 0, "bowler": "Ravindra Jadeja" },
+        { "over": 15, "runs": 8,  "wickets": 0, "bowler": "Matheesha Pathirana" },
+        { "over": 16, "runs": 13, "wickets": 1, "bowler": "Deepak Chahar" },
+        { "over": 17, "runs": 9,  "wickets": 0, "bowler": "Ravindra Jadeja" },
+        { "over": 18, "runs": 11, "wickets": 0, "bowler": "Matheesha Pathirana" },
+        { "over": 19, "runs": 12, "wickets": 0, "bowler": "Deepak Chahar" },
+        { "over": 20, "runs": 13, "wickets": 0, "bowler": "Ravindra Jadeja" }
+      ]
+    }
+  ]
+}
