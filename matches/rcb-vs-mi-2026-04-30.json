@@ -1,0 +1,28 @@
+{
+  "matchId": "rcb-vs-mi-2026-04-15",
+  "status": "live",
+  "team1": "RCB",
+  "team2": "MI",
+  "venue": "M. Chinnaswamy Stadium, Bangalore",
+  "date": "2025-04-15",
+  "result": "",
+  "innings": [
+    {
+      "battingTeam": "MI",
+      "bowlingTeam": "RCB",
+      "commentary": "RCB started brilliantly with Bhuvneshwar getting early movement. Hazlewood was economical in the middle overs. Death bowling was tight.",
+      "overs": [
+        { "over": 1,  "runs": 12, "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 2,  "runs": 15, "wickets": 1, "bowler": "Krunal Pandya" },
+        { "over": 3,  "runs": 8,  "wickets": 0, "bowler": "Swapnil Singh" },
+        { "over": 4,  "runs": 12, "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 5,  "runs": 13, "wickets": 1, "bowler": "Hazlewood" },
+        { "over": 6,  "runs": 19, "wickets": 0, "bowler": "Krunal Pandya" },
+        { "over": 7,  "runs": 9,  "wickets": 1, "bowler": "Swapnil Singh" },
+        { "over": 8,  "runs": 7,  "wickets": 0, "bowler": "Vicky" },
+        { "over": 9,  "runs": 13, "wickets": 0, "bowler": "Hazlewood" },
+        { "over": 10, "runs": 10, "wickets": 1, "bowler": "Bhuvneshwar Kumar" }
+      ]
+    }
+  ]
+}
