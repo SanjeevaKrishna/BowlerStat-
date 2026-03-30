@@ -19,13 +19,13 @@
       "file": "rcb-vs-csk-2025-04-15.json"
     },
     {
-      "matchId": "rcb-vs-srh-2025-04-10",
+      "matchId": "rcb-vs-srh-2026-03-28",
       "status": "completed",
       "team1": "RCB",
       "team2": "SRH",
       "date": "2025-04-10",
-      "result": "SRH WON",
-      "file": "rcb-vs-srh-2025-04-10.json"
+      "result": "RCB WON",
+      "file": "rcb-vs-srh-2026-03-28.json"
     }
   ]
 }
