@@ -31,6 +31,15 @@
       "matchId": "rcb-vs-srh-2026-03-28",
       "status": "completed",
       "team1": "RCB",
+      "team2": "csk",
+      "date": "2025-04-15",
+      "result": "RCB WON BY 18 RUNS",
+      "file": "rcb-vs-srh-2026-03-28.json"
+    },
+    {
+      "matchId": "rcb-vs-srh-2026-03-28",
+      "status": "completed",
+      "team1": "RCB",
       "team2": "SRH",
       "date": "2026-03-28",
       "result": "RCB WON",
