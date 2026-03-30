@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Matches – BowlerStats IPL Bowling Analysis</title>
+<meta name="description" content="Browse all IPL 2025 matches with detailed bowling histograms and over-by-over analysis on BowlerStats.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0e1a;--surface:#111827;--card:#1a2235;--border:#253047;--gold:#f5c518;--red:#ef4444;--text:#e2e8f0;--muted:#94a3b8}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+nav{background:var(--surface);border-bottom:2px solid var(--gold);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);text-decoration:none}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:4px}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;padding:6px 10px;border-radius:6px;transition:all .2s}
+.nav-links a:hover,.nav-links a.act{color:var(--gold);background:rgba(245,197,24,.1)}
+.page-hero{background:linear-gradient(135deg,#111827,#0a0e1a);padding:28px 16px;border-bottom:1px solid var(--border);text-align:center}
+.page-hero h1{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:3px}
+.page-hero p{color:var(--muted);font-size:13px;margin-top:6px}
+main{max-width:860px;margin:0 auto;padding:16px}
+.sh{display:flex;align-items:center;gap:10px;margin:20px 0 10px}
+.sh h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px}
+.live-badge{background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:1px;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.prev-card{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;text-decoration:none;color:var(--text);transition:border-color .2s}
+.prev-card:hover{border-color:var(--gold)}
+.prev-teams{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px}
+.prev-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.prev-result{font-size:10px;font-weight:700;color:var(--gold);text-align:right;margin-bottom:4px}
+.arrow{color:var(--muted);font-size:18px}
+.ad-box{background:var(--surface);border:1px dashed var(--border);border-radius:8px;text-align:center;padding:12px;color:var(--muted);font-size:10px;margin:12px 0}
+.loading{text-align:center;padding:36px;color:var(--muted)}
+.spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:20px 16px;text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
+.foot-links{display:flex;justify-content:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.foot-links a{color:var(--muted);text-decoration:none}
+.foot-links a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">BOWLER<span>STATS</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="matches.html" class="act">Matches</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+<div class="page-hero">
+  <h1>ALL MATCHES</h1>
+  <p>Complete IPL 2025 bowling analysis archive</p>
+</div>
+<main>
+  <div class="ad-box">Advertisement</div>
+  <div class="sh"><h2>Live</h2><span class="live-badge">&#9679; LIVE</span></div>
+  <div id="live-section"><div class="loading"><div class="spinner"></div>Checking...</div></div>
+  <div class="sh"><h2>Completed Matches</h2></div>
+  <div id="completed-section"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+  <div class="ad-box">Advertisement</div>
+</main>
+<footer>
+  <div class="foot-links">
+    <a href="index.html">Home</a>
+    <a href="matches.html">Matches</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <p>© 2025 BowlerStats &middot; bowlerstat@gmail.com</p>
+</footer>
+
+<script>
+async function load() {
+  var liveEl = document.getElementById('live-section');
+  var compEl = document.getElementById('completed-section');
+  try {
+    var r = await fetch('matches/live.json?nc=' + Date.now());
+    var d = await r.json();
+    if (d.status === 'live') {
+      liveEl.innerHTML = '<a class="prev-card" href="index.html"><div><div class="prev-teams">' + d.team1 + ' VS ' + d.team2 + '</div><div class="prev-meta">&#128205; ' + (d.venue||'') + ' &middot; &#128197; ' + (d.date||'') + '</div></div><div><div class="prev-result"><span class="live-badge">&#9679; LIVE</span></div><div class="arrow">&#8250;</div></div></a>';
+    } else {
+      liveEl.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:8px 0">No live match right now.</p>';
+    }
+  } catch(e) {
+    liveEl.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:8px 0">No live match right now.</p>';
+  }
+  try {
+    var r2 = await fetch('matches/index.json?nc=' + Date.now());
+    var d2 = await r2.json();
+    var list = d2.matches.filter(function(m){ return m.status === 'completed'; });
+    if (!list.length) { compEl.innerHTML = '<p style="color:var(--muted);text-align:center">No completed matches yet.</p>'; return; }
+    var html = '';
+    for (var i = 0; i < list.length; i++) {
+      var m = list[i];
+      html += '<a class="prev-card" href="match.html?id=' + m.matchId + '"><div><div class="prev-teams">' + m.team1 + ' VS ' + m.team2 + '</div><div class="prev-meta">&#128197; ' + m.date + '</div></div><div><div class="prev-result">' + (m.result||'') + '</div><div class="arrow">&#8250;</div></div></a>';
+    }
+    compEl.innerHTML = html;
+  } catch(e) {
+    compEl.innerHTML = '<p style="color:var(--muted);text-align:center">Could not load matches.</p>';
+  }
+}
+load();
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "matches": [
+    {
+      "matchId": "rcb-vs-mi-2025-04-15",
+      "status": "completed",
+      "team1": "RCB",
+      "team2": "MI",
+      "date": "2025-04-15",
+      "result": "RCB WON BY 18 RUNS",
+      "file": "rcb-vs-mi-2025-04-15.json"
+    },
+    {
+      "matchId": "rcb-vs-srh-2025-04-10",
+      "status": "completed",
+      "team1": "RCB",
+      "team2": "SRH",
+      "date": "2025-04-10",
+      "result": "SRH WON",
+      "file": "rcb-vs-srh-2025-04-10.json"
+    }
+  ]
+}

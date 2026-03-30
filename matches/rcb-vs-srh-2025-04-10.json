@@ -1,0 +1,69 @@
+{
+  "matchId": "rcb-vs-srh-2025-04-10",
+  "status": "completed",
+  "team1": "RCB",
+  "team2": "SRH",
+  "venue": "M. Chinnaswamy Stadium, Bangalore",
+  "date": "2025-04-10",
+  "result": "SRH WON",
+  "innings": [
+    {
+      "battingTeam": "SRH",
+      "bowlingTeam": "RCB",
+      "totalRuns": 201,
+      "wickets": 6,
+      "commentary": "RCB bowled very well in the first half. Bhuvneshwar and Hazlewood were excellent. However SRH's lower order hit some big shots in overs 17-19 to push past 200.",
+      "overs": [
+        { "over": 1,  "runs": 12, "wickets": 1, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 2,  "runs": 8,  "wickets": 0, "bowler": "Hazlewood" },
+        { "over": 3,  "runs": 13, "wickets": 0, "bowler": "Krunal Pandya" },
+        { "over": 4,  "runs": 9,  "wickets": 1, "bowler": "Swapnil Singh" },
+        { "over": 5,  "runs": 7,  "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 6,  "runs": 13, "wickets": 0, "bowler": "Hazlewood" },
+        { "over": 7,  "runs": 10, "wickets": 1, "bowler": "Krunal Pandya" },
+        { "over": 8,  "runs": 8,  "wickets": 0, "bowler": "Swapnil Singh" },
+        { "over": 9,  "runs": 13, "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 10, "runs": 8,  "wickets": 0, "bowler": "Hazlewood" },
+        { "over": 11, "runs": 13, "wickets": 0, "bowler": "Krunal Pandya" },
+        { "over": 12, "runs": 9,  "wickets": 1, "bowler": "Swapnil Singh" },
+        { "over": 13, "runs": 8,  "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 14, "runs": 13, "wickets": 0, "bowler": "Hazlewood" },
+        { "over": 15, "runs": 9,  "wickets": 0, "bowler": "Krunal Pandya" },
+        { "over": 16, "runs": 14, "wickets": 1, "bowler": "Swapnil Singh" },
+        { "over": 17, "runs": 16, "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 18, "runs": 14, "wickets": 0, "bowler": "Hazlewood" },
+        { "over": 19, "runs": 16, "wickets": 1, "bowler": "Krunal Pandya" },
+        { "over": 20, "runs": 8,  "wickets": 1, "bowler": "Swapnil Singh" }
+      ]
+    },
+    {
+      "battingTeam": "RCB",
+      "bowlingTeam": "SRH",
+      "totalRuns": 196,
+      "wickets": 8,
+      "commentary": "SRH made it! RCB needed 202 and came very close but fell short by 5 runs. Fateh Singh and Jaydev Unadkat bowled brilliantly in the death overs to defend the total.",
+      "overs": [
+        { "over": 1,  "runs": 14, "wickets": 1, "bowler": "Fateh Singh" },
+        { "over": 2,  "runs": 16, "wickets": 0, "bowler": "Jaydev Unadkat" },
+        { "over": 3,  "runs": 16, "wickets": 0, "bowler": "Harshad Patel" },
+        { "over": 4,  "runs": 9,  "wickets": 1, "bowler": "Fateh Singh" },
+        { "over": 5,  "runs": 9,  "wickets": 0, "bowler": "Jaydev Unadkat" },
+        { "over": 6,  "runs": 8,  "wickets": 1, "bowler": "Harshad Patel" },
+        { "over": 7,  "runs": 6,  "wickets": 0, "bowler": "Fateh Singh" },
+        { "over": 8,  "runs": 8,  "wickets": 0, "bowler": "Jaydev Unadkat" },
+        { "over": 9,  "runs": 6,  "wickets": 1, "bowler": "Harshad Patel" },
+        { "over": 10, "runs": 6,  "wickets": 0, "bowler": "Fateh Singh" },
+        { "over": 11, "runs": 8,  "wickets": 0, "bowler": "Jaydev Unadkat" },
+        { "over": 12, "runs": 14, "wickets": 0, "bowler": "Harshad Patel" },
+        { "over": 13, "runs": 14, "wickets": 1, "bowler": "Fateh Singh" },
+        { "over": 14, "runs": 8,  "wickets": 0, "bowler": "Jaydev Unadkat" },
+        { "over": 15, "runs": 8,  "wickets": 0, "bowler": "Harshad Patel" },
+        { "over": 16, "runs": 6,  "wickets": 1, "bowler": "Fateh Singh" },
+        { "over": 17, "runs": 6,  "wickets": 0, "bowler": "Jaydev Unadkat" },
+        { "over": 18, "runs": 7,  "wickets": 0, "bowler": "Harshad Patel" },
+        { "over": 19, "runs": 10, "wickets": 1, "bowler": "Fateh Singh" },
+        { "over": 20, "runs": 8,  "wickets": 1, "bowler": "Jaydev Unadkat" }
+      ]
+    }
+  ]
+}

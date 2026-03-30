@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BowlerStats – IPL 2025 Bowling Analysis | Over-by-Over Histograms</title>
+<meta name="description" content="BowlerStats: The only cricket site focused on bowler performance. Live IPL 2025 bowling analysis with over-by-over histograms, economy rates, wicket tracking and innings commentary.">
+<meta name="keywords" content="IPL bowling stats 2025, cricket bowler analysis, IPL bowling histogram, over by over cricket analysis, bowler economy rate IPL, RCB bowling, MI bowling, cricket statistics India, IPL 2025 stats">
+<meta name="robots" content="index, follow">
+<meta name="author" content="BowlerStats">
+<meta property="og:title" content="BowlerStats – IPL 2025 Bowling Analysis">
+<meta property="og:description" content="Live IPL bowling analysis with over-by-over histograms. Cricket's first bowler-focused stats site.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bowlerstats.vercel.app">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BowlerStats – IPL 2025 Bowling Analysis">
+<meta name="twitter:description" content="Over-by-over bowling histograms for every IPL 2025 match.">
+<link rel="canonical" href="https://bowlerstats.vercel.app">
+<!-- Google AdSense: uncomment after approval -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"BowlerStats",
+  "url":"https://bowlerstats.vercel.app",
+  "description":"Cricket bowling analysis website with over-by-over histograms for IPL 2025 matches.",
+  "potentialAction":{
+    "@type":"SearchAction",
+    "target":"https://bowlerstats.vercel.app/matches.html",
+    "query-input":"required name=search_term_string"
+  }
+}
+</script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e1a;--surface:#111827;--card:#1a2235;--border:#253047;
+  --gold:#f5c518;--red:#ef4444;--green:#22c55e;
+  --text:#e2e8f0;--muted:#94a3b8;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+/* NAV */
+nav{background:var(--surface);border-bottom:2px solid var(--gold);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);text-decoration:none}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:4px}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;padding:6px 10px;border-radius:6px;transition:all .2s}
+.nav-links a:hover,.nav-links a.act{color:var(--gold);background:rgba(245,197,24,.1)}
+/* HERO */
+.hero{background:linear-gradient(160deg,#111827 0%,#0d1526 50%,#0a0e1a 100%);padding:28px 16px 20px;text-align:center;border-bottom:1px solid var(--border)}
+.tagline{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:8px}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,7vw,56px);letter-spacing:3px;line-height:1;color:var(--text)}
+.hero h1 span{color:var(--gold)}
+.hero-sub{color:var(--muted);font-size:13px;margin-top:8px;line-height:1.6;max-width:440px;margin-left:auto;margin-right:auto}
+.hero-pills{display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:4px 10px;border-radius:20px}
+/* MAIN */
+main{max-width:860px;margin:0 auto;padding:16px}
+/* SECTION HEADER */
+.sh{display:flex;align-items:center;gap:10px;margin:20px 0 10px}
+.sh h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px}
+.live-badge{background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:1px;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+/* MATCH CARD */
+.match-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.match-header{background:linear-gradient(135deg,#1a2235,#1e2d45);padding:16px;border-bottom:1px solid var(--border)}
+.match-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,5vw,36px);letter-spacing:3px}
+.match-meta{color:var(--muted);font-size:11px;margin-top:5px;display:flex;gap:12px;flex-wrap:wrap}
+.result-badge{display:inline-block;border:1.5px solid var(--gold);color:var(--gold);font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-top:7px}
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border)}
+.stat-box{padding:10px 6px;text-align:center;border-right:1px solid var(--border)}
+.stat-box:last-child{border-right:none}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);line-height:1}
+.stat-val.red{color:var(--red)}
+.stat-lbl{font-size:8px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-top:3px}
+/* INNINGS */
+.innings-wrap{padding:14px 14px 0}
+.innings-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.innings-badge{background:rgba(245,197,24,.13);border:1px solid var(--gold);color:var(--gold);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;white-space:nowrap}
+.innings-title{font-size:11px;color:var(--muted)}
+/* HISTOGRAM */
+.chart-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.histogram{display:flex;align-items:flex-end;gap:3px;height:140px;min-width:min-content;padding:0 2px}
+.bar-group{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:28px;flex:1}
+.bar-top{font-size:8px;font-weight:700;color:var(--text);min-height:12px;text-align:center}
+.bar-fill{width:100%;border-radius:2px 2px 0 0;position:relative;cursor:pointer;transition:filter .15s}
+.bar-fill:hover,.bar-fill:active{filter:brightness(1.4)}
+.bar-fill.n{background:linear-gradient(180deg,#f5c518,#c8960a)}
+.bar-fill.w{background:linear-gradient(180deg,#ef4444,#991b1b)}
+.bar-fill.d{background:linear-gradient(180deg,#22c55e,#166534)}
+.wicket-dot{width:7px;height:7px;background:#ff6b6b;border-radius:50%;border:1.5px solid #fff;position:absolute;top:-5px;left:50%;transform:translateX(-50%)}
+.bar-num{font-size:8px;color:var(--muted)}
+.bar-bowler{font-size:7px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:28px;text-align:center}
+.legend{display:flex;gap:12px;margin:8px 0 4px;flex-wrap:wrap}
+.leg{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted)}
+.leg-sq{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+/* COMMENTARY */
+.commentary-section{margin:12px 14px 0}
+.commentary-card{background:linear-gradient(135deg,rgba(245,197,24,.06),rgba(245,197,24,.02));border:1px solid rgba(245,197,24,.3);border-radius:10px;padding:12px 16px;position:relative;overflow:hidden}
+.commentary-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold);border-radius:4px 0 0 4px}
+.commentary-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.commentary-label::after{content:'';flex:1;height:1px;background:rgba(245,197,24,.2)}
+.commentary-text{font-size:12px;line-height:1.75;color:var(--text)}
+/* INNINGS DIVIDER */
+.innings-div{height:1px;background:var(--border);margin:14px 14px 0}
+/* PREV CARDS */
+.prev-card{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;text-decoration:none;color:var(--text);transition:border-color .2s}
+.prev-card:hover{border-color:var(--gold)}
+.prev-teams{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px}
+.prev-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.prev-result{font-size:10px;font-weight:700;color:var(--gold);text-align:right;margin-bottom:3px}
+.arrow{color:var(--muted);font-size:18px}
+/* AD */
+.ad-box{background:var(--surface);border:1px dashed var(--border);border-radius:8px;text-align:center;padding:12px;color:var(--muted);font-size:10px;margin:12px 0}
+/* LOADING */
+.loading{text-align:center;padding:36px;color:var(--muted)}
+.spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* TOOLTIP */
+#tip{position:fixed;background:#060c1a;border:1px solid var(--gold);color:var(--text);font-size:11px;padding:8px 12px;border-radius:8px;pointer-events:none;z-index:9999;display:none;line-height:1.7;min-width:130px}
+#tip strong{color:var(--gold);display:block;margin-bottom:2px}
+/* SEO CONTENT */
+.seo-section{margin:24px 0;padding:20px;background:var(--surface);border-radius:12px;border:1px solid var(--border)}
+.seo-section h2{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--gold);margin-bottom:8px}
+.seo-section p{font-size:12px;color:var(--muted);line-height:1.7}
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:20px 16px;text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
+.foot-links{display:flex;justify-content:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.foot-links a{color:var(--muted);text-decoration:none}
+.foot-links a:hover{color:var(--gold)}
+@media(max-width:480px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .stat-box:nth-child(2){border-right:none}
+  .stat-box:nth-child(3){border-top:1px solid var(--border)}
+  .hero-pills{gap:6px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">BOWLER<span>STATS</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="act">Home</a>
+    <a href="matches.html">Matches</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="tagline">&#127955; Cricket's Bowler-First Stats Site</div>
+  <h1>BOWLER<span>STATS</span></h1>
+  <p class="hero-sub">Over-by-over bowling histograms for every IPL 2025 match. Because bowlers win matches.</p>
+  <div class="hero-pills">
+    <span class="pill">&#128200; Over-by-over charts</span>
+    <span class="pill">&#128172; Innings commentary</span>
+    <span class="pill">&#128241; Mobile-first</span>
+    <span class="pill">&#128308; Live match tracking</span>
+  </div>
+</div>
+
+<main>
+  <div class="ad-box">Advertisement</div>
+
+  <!-- LIVE MATCH -->
+  <div id="live-section"></div>
+
+  <div class="ad-box">Advertisement</div>
+
+  <!-- PREVIOUS MATCHES -->
+  <div class="sh"><h2>Previous Matches</h2></div>
+  <div id="prev-list"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+
+  <!-- SEO TEXT BLOCK — helps Google understand the page -->
+  <div class="seo-section">
+    <h2>About BowlerStats</h2>
+    <p>BowlerStats is India's first cricket statistics website focused entirely on bowler performance during IPL 2025. Every match is broken down over-by-over with color-coded histograms: gold bars for normal overs, red bars for wicket overs, and green bars for dot overs. Tap or hover any bar to see the bowler name, exact runs conceded, and wickets taken. Each innings also includes expert commentary and a bowler summary table with economy rates.</p>
+  </div>
+
+  <div class="ad-box">Advertisement</div>
+</main>
+
+<footer>
+  <div class="foot-links">
+    <a href="index.html">Home</a>
+    <a href="matches.html">Matches</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <p>&#169; 2025 BowlerStats &middot; bowlerstat@gmail.com</p>
+  <p style="margin-top:5px;font-size:11px">IPL 2025 Bowling Analysis &middot; Over-by-Over Cricket Statistics</p>
+</footer>
+
+<div id="tip"></div>
+
+<script>
+function calcStats(overs) {
+  var runs=0, wkts=0, worst={over:'-',runs:0};
+  for(var i=0;i<overs.length;i++){
+    runs+=overs[i].runs;
+    wkts+=(overs[i].wickets||0);
+    if(overs[i].runs>worst.runs) worst=overs[i];
+  }
+  return {runs:runs,wkts:wkts,eco:overs.length?(runs/overs.length).toFixed(1):'0.0',worst:worst};
+}
+
+function buildHistogram(overs) {
+  if(!overs||overs.length===0) return '<p style="color:var(--muted);font-size:12px;padding:8px 0">No over data yet.</p>';
+  var max=1;
+  for(var i=0;i<overs.length;i++){if(overs[i].runs>max)max=overs[i].runs;}
+  var html='<div class="chart-scroll"><div class="histogram">';
+  for(var i=0;i<overs.length;i++){
+    var o=overs[i];
+    var h=Math.max(Math.round((o.runs/max)*125),10);
+    var cls=(o.wickets>0)?'w':(o.runs===0)?'d':'n';
+    var ln=o.bowler?o.bowler.split(' ').pop().substring(0,6):'';
+    var wd=(o.wickets>0)?'<div class="wicket-dot"></div>':'';
+    html+='<div class="bar-group">'
+      +'<div class="bar-top">'+o.runs+'</div>'
+      +'<div class="bar-fill '+cls+'" style="height:'+h+'px"'
+      +' data-over="'+o.over+'" data-runs="'+o.runs+'" data-wkts="'+(o.wickets||0)+'" data-bowler="'+(o.bowler||'')+'">'+wd+'</div>'
+      +'<div class="bar-num">O'+o.over+'</div>'
+      +'<div class="bar-bowler" title="'+(o.bowler||'')+'">'+ln+'</div>'
+      +'</div>';
+  }
+  html+='</div></div><div class="legend">'
+    +'<div class="leg"><div class="leg-sq" style="background:var(--gold)"></div>Normal</div>'
+    +'<div class="leg"><div class="leg-sq" style="background:var(--red)"></div>Wicket</div>'
+    +'<div class="leg"><div class="leg-sq" style="background:var(--green)"></div>Dot over</div>'
+    +'</div>';
+  return html;
+}
+
+function buildCard(data, isLive) {
+  var allOvers=[];
+  for(var i=0;i<data.innings.length;i++)
+    for(var j=0;j<data.innings[i].overs.length;j++)
+      allOvers.push(data.innings[i].overs[j]);
+  var s=calcStats(allOvers);
+
+  var html='<div class="match-card">';
+  html+='<div class="match-header">';
+  if(isLive) html+='<span class="live-badge" style="display:inline-block;margin-bottom:6px">&#9679; LIVE</span>';
+  html+='<div class="match-title">'+data.team1+' VS '+data.team2+'</div>';
+  html+='<div class="match-meta">'+(data.venue?'<span>&#128205; '+data.venue+'</span>':'')+(data.date?'<span>&#128197; '+data.date+'</span>':'')+'</div>';
+  if(data.result) html+='<div><span class="result-badge">'+data.result+'</span></div>';
+  html+='</div>';
+
+  html+='<div class="stats-row">'
+    +'<div class="stat-box"><div class="stat-val">'+s.runs+'</div><div class="stat-lbl">Total Runs</div></div>'
+    +'<div class="stat-box"><div class="stat-val">'+s.wkts+'</div><div class="stat-lbl">Wickets</div></div>'
+    +'<div class="stat-box"><div class="stat-val">'+s.eco+'</div><div class="stat-lbl">Avg Economy</div></div>'
+    +'<div class="stat-box"><div class="stat-val red">'+s.worst.runs+'<span style="font-size:11px;color:var(--muted)"> O'+s.worst.over+'</span></div><div class="stat-lbl">Worst Over</div></div>'
+    +'</div>';
+
+  for(var i=0;i<data.innings.length;i++){
+    var inn=data.innings[i];
+    var ord=(i===0)?'1st':'2nd';
+    if(i>0) html+='<div class="innings-div"></div>';
+    html+='<div class="innings-wrap">'
+      +'<div class="innings-header">'
+      +'<span class="innings-badge">'+ord+' INNINGS</span>'
+      +'<span class="innings-title">'+inn.bowlingTeam+' vs '+inn.battingTeam+' &mdash; '+inn.overs.length+' overs'+(inn.totalRuns?' &mdash; '+inn.totalRuns+'/'+(inn.wickets||0):'')+'</span>'
+      +'</div>'
+      +buildHistogram(inn.overs)
+      +'</div>';
+    if(inn.commentary){
+      html+='<div class="commentary-section">'
+        +'<div class="commentary-card">'
+        +'<div class="commentary-label">&#128172; Innings Commentary</div>'
+        +'<div class="commentary-text">'+inn.commentary+'</div>'
+        +'</div></div>';
+    }
+  }
+  html+='</div>';
+  return html;
+}
+
+async function loadLive(){
+  var sec=document.getElementById('live-section');
+  try{
+    var r=await fetch('matches/live.json?v='+Date.now());
+    if(!r.ok) throw new Error('no file');
+    var d=await r.json();
+    if(d.status!=='live') throw new Error('not live');
+    sec.innerHTML='<div class="sh"><h2>Live Match</h2><span class="live-badge">&#9679; LIVE</span></div>'+buildCard(d,true);
+  } catch(e){
+    sec.innerHTML='<div class="sh"><h2>Live Match</h2></div>'
+      +'<div class="match-card" style="padding:24px;text-align:center;color:var(--muted)">'
+      +'&#127955; No live match right now. Check back during an IPL game!</div>';
+  }
+}
+
+async function loadPrev(){
+  var el=document.getElementById('prev-list');
+  try{
+    var r=await fetch('matches/index.json?v='+Date.now());
+    if(!r.ok) throw new Error('no index');
+    var d=await r.json();
+    var list=d.matches.filter(function(m){return m.status==='completed';});
+    if(!list.length){el.innerHTML='<p style="color:var(--muted);text-align:center;padding:20px">No completed matches yet.</p>';return;}
+    var html='';
+    for(var i=0;i<list.length;i++){
+      var m=list[i];
+      html+='<a class="prev-card" href="match.html?id='+m.matchId+'">'
+        +'<div><div class="prev-teams">'+m.team1+' VS '+m.team2+'</div><div class="prev-meta">&#128197; '+m.date+'</div></div>'
+        +'<div><div class="prev-result">'+(m.result||'')+'</div><div class="arrow">&#8250;</div></div>'
+        +'</a>';
+    }
+    el.innerHTML=html;
+  } catch(e){
+    el.innerHTML='<p style="color:var(--muted);text-align:center">Could not load matches.</p>';
+  }
+}
+
+var tip=document.getElementById('tip');
+document.addEventListener('mousemove',function(e){
+  var bar=e.target.closest?e.target.closest('.bar-fill'):null;
+  if(bar){
+    tip.innerHTML='<strong>Over '+bar.dataset.over+'</strong>Runs: '+bar.dataset.runs+'<br>Wickets: '+bar.dataset.wkts+'<br>Bowler: '+(bar.dataset.bowler||'N/A');
+    tip.style.display='block';tip.style.left=(e.clientX+16)+'px';tip.style.top=(e.clientY-12)+'px';tip.style.transform='';
+  } else {tip.style.display='none';}
+});
+document.addEventListener('click',function(e){
+  var bar=e.target.closest?e.target.closest('.bar-fill'):null;
+  if(bar){
+    tip.innerHTML='<strong>Over '+bar.dataset.over+'</strong>Runs: '+bar.dataset.runs+'<br>Wickets: '+bar.dataset.wkts+'<br>Bowler: '+(bar.dataset.bowler||'N/A');
+    tip.style.display='block';tip.style.left='50%';tip.style.top='80px';tip.style.transform='translateX(-50%)';
+    setTimeout(function(){tip.style.display='none';},3500);
+  }
+});
+
+loadLive();
+loadPrev();
+</script>
+</body>
+</html>

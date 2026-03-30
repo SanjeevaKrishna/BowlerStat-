@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Match Analysis – BowlerStats IPL Bowling</title>
+<meta name="description" content="Over-by-over bowling analysis, economy rates and wicket tracking for IPL matches on BowlerStats.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Match Analysis – BowlerStats">
+<meta property="og:description" content="Over-by-over bowling histogram analysis for IPL 2025 matches.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://bowlerstats.vercel.app/match.html">
+<!-- Google AdSense: uncomment after approval and replace XXXX with your publisher ID -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e1a;--surface:#111827;--card:#1a2235;--border:#253047;
+  --gold:#f5c518;--red:#ef4444;--green:#22c55e;--blue:#38bdf8;
+  --text:#e2e8f0;--muted:#94a3b8;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+nav{background:var(--surface);border-bottom:2px solid var(--gold);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);text-decoration:none}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:4px}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;padding:6px 10px;border-radius:6px;transition:all .2s}
+.nav-links a:hover,.nav-links a.act{color:var(--gold);background:rgba(245,197,24,.1)}
+main{max-width:860px;margin:0 auto;padding:16px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-size:13px;margin-bottom:14px;padding:7px 12px;border:1px solid var(--border);border-radius:8px;transition:all .2s}
+.back-btn:hover{color:var(--gold);border-color:var(--gold)}
+
+/* MATCH CARD */
+.match-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.match-header{background:linear-gradient(135deg,#1a2235,#1e2d45);padding:16px;border-bottom:1px solid var(--border)}
+.match-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,5vw,38px);letter-spacing:3px;line-height:1.1}
+.match-meta{color:var(--muted);font-size:11px;margin-top:5px;display:flex;gap:14px;flex-wrap:wrap}
+.result-badge{display:inline-block;border:1.5px solid var(--gold);color:var(--gold);font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;letter-spacing:1px;margin-top:8px}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border)}
+.stat-box{padding:12px 6px;text-align:center;border-right:1px solid var(--border)}
+.stat-box:last-child{border-right:none}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);line-height:1}
+.stat-val.red{color:var(--red)}
+.stat-lbl{font-size:8px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-top:3px}
+
+/* INNINGS */
+.innings-wrap{padding:14px 14px 0}
+.innings-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.innings-badge{background:rgba(245,197,24,.15);border:1px solid var(--gold);color:var(--gold);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;white-space:nowrap}
+.innings-title{font-size:12px;color:var(--muted);font-weight:500}
+
+/* HISTOGRAM */
+.chart-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.histogram{display:flex;align-items:flex-end;gap:3px;height:150px;min-width:min-content;padding:0 2px}
+.bar-group{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:30px;flex:1}
+.bar-top{font-size:8px;font-weight:700;color:var(--text);min-height:13px;text-align:center}
+.bar-fill{width:100%;border-radius:3px 3px 0 0;position:relative;cursor:pointer;transition:filter .15s}
+.bar-fill:hover,.bar-fill:active{filter:brightness(1.4)}
+.bar-fill.n{background:linear-gradient(180deg,#f5c518,#c8960a)}
+.bar-fill.w{background:linear-gradient(180deg,#ef4444,#991b1b)}
+.bar-fill.d{background:linear-gradient(180deg,#22c55e,#166534)}
+.wicket-dot{width:8px;height:8px;background:#ff6b6b;border-radius:50%;border:2px solid #fff;position:absolute;top:-6px;left:50%;transform:translateX(-50%)}
+.bar-num{font-size:8px;color:var(--muted);text-align:center}
+.bar-bowler{font-size:7px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:30px;text-align:center}
+.legend{display:flex;gap:14px;margin:10px 0 4px;flex-wrap:wrap}
+.leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
+.leg-sq{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* COMMENTARY - improved */
+.commentary-section{margin:14px 14px 0}
+.commentary-card{background:linear-gradient(135deg,rgba(245,197,24,.06),rgba(245,197,24,.02));border:1px solid rgba(245,197,24,.3);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.commentary-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold);border-radius:4px 0 0 4px}
+.commentary-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.commentary-label::after{content:'';flex:1;height:1px;background:rgba(245,197,24,.2)}
+.commentary-text{font-size:13px;line-height:1.75;color:var(--text);font-weight:400}
+
+/* BOWLER TABLE */
+.table-section{margin:14px 14px 14px}
+.table-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.tbl-scroll{overflow-x:auto;border-radius:8px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:300px}
+th{background:rgba(255,255,255,.03);color:var(--muted);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+.eco-good{color:var(--green);font-weight:700}
+.eco-ok{color:var(--gold);font-weight:700}
+.eco-bad{color:var(--red);font-weight:700}
+
+/* DIVIDER between innings */
+.innings-divider{height:1px;background:var(--border);margin:0 14px}
+
+/* AD */
+.ad-box{background:var(--surface);border:1px dashed var(--border);border-radius:8px;text-align:center;padding:12px;color:var(--muted);font-size:10px;margin:12px 0}
+
+/* ERROR BOX */
+.error-box{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:20px;text-align:center;color:var(--text)}
+.error-box h3{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--red);letter-spacing:2px;margin-bottom:8px}
+.error-box p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:8px}
+.error-box code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px;font-size:12px;color:var(--gold)}
+
+/* LOADING */
+.loading{text-align:center;padding:40px;color:var(--muted)}
+.spinner{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* TOOLTIP */
+#tip{position:fixed;background:#060c1a;border:1px solid var(--gold);color:var(--text);font-size:11px;padding:8px 12px;border-radius:8px;pointer-events:none;z-index:9999;display:none;line-height:1.7;min-width:130px;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+#tip strong{color:var(--gold);display:block;margin-bottom:2px}
+
+/* SCHEMA breadcrumb */
+.breadcrumb{font-size:11px;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.breadcrumb a{color:var(--muted);text-decoration:none}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:var(--border)}
+
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:20px 16px;text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
+.foot-links{display:flex;justify-content:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.foot-links a{color:var(--muted);text-decoration:none}
+.foot-links a:hover{color:var(--gold)}
+
+@media(max-width:480px){
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .stat-box:nth-child(2){border-right:none}
+  .stat-box:nth-child(3){border-top:1px solid var(--border)}
+}
+</style>
+
+<!-- JSON-LD Schema for Google -->
+<script type="application/ld+json" id="schema-org">
+{
+  "@context":"https://schema.org",
+  "@type":"SportsEvent",
+  "name":"IPL Match Analysis",
+  "sport":"Cricket",
+  "organizer":{"@type":"Organization","name":"IPL"},
+  "url":"https://bowlerstats.vercel.app/match.html"
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">BOWLER<span>STATS</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="matches.html" class="act">Matches</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<main>
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    <a href="matches.html">Matches</a>
+    <span>›</span>
+    <span id="bc-match">Match</span>
+  </nav>
+  <a class="back-btn" href="matches.html">&#8592; All Matches</a>
+  <div class="ad-box">
+    <!-- AdSense unit here after approval -->
+    Advertisement
+  </div>
+  <div id="content"><div class="loading"><div class="spinner"></div>Loading match data...</div></div>
+  <div class="ad-box">Advertisement</div>
+</main>
+
+<footer>
+  <div class="foot-links">
+    <a href="index.html">Home</a>
+    <a href="matches.html">Matches</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <p>&#169; 2025 BowlerStats &middot; bowlerstat@gmail.com</p>
+</footer>
+
+<div id="tip"></div>
+
+<script>
+// ── UTILITY ──────────────────────────────────────────────
+function calcStats(overs) {
+  var runs = 0, wkts = 0, worst = {over:'-', runs:0};
+  for (var i = 0; i < overs.length; i++) {
+    runs += overs[i].runs;
+    wkts += (overs[i].wickets || 0);
+    if (overs[i].runs > worst.runs) worst = overs[i];
+  }
+  var eco = overs.length > 0 ? (runs / overs.length).toFixed(1) : '0.0';
+  return {runs:runs, wkts:wkts, eco:eco, worst:worst};
+}
+
+function ecoClass(eco) {
+  var e = parseFloat(eco);
+  if (e < 7) return 'eco-good';
+  if (e < 9) return 'eco-ok';
+  return 'eco-bad';
+}
+
+// ── HISTOGRAM ────────────────────────────────────────────
+function buildHistogram(overs) {
+  if (!overs || overs.length === 0) return '<p style="color:var(--muted);font-size:12px;padding:8px 0">No over data yet.</p>';
+  var max = 1;
+  for (var i = 0; i < overs.length; i++) {
+    if (overs[i].runs > max) max = overs[i].runs;
+  }
+  var html = '<div class="chart-scroll"><div class="histogram">';
+  for (var i = 0; i < overs.length; i++) {
+    var o = overs[i];
+    var h = Math.max(Math.round((o.runs / max) * 130), 10);
+    var cls = (o.wickets > 0) ? 'w' : (o.runs === 0) ? 'd' : 'n';
+    var lastName = o.bowler ? o.bowler.split(' ').pop().substring(0, 6) : '';
+    var dot = (o.wickets > 0) ? '<div class="wicket-dot"></div>' : '';
+    html += '<div class="bar-group">';
+    html += '<div class="bar-top">' + o.runs + '</div>';
+    html += '<div class="bar-fill ' + cls + '" style="height:' + h + 'px"'
+          + ' data-over="' + o.over + '"'
+          + ' data-runs="' + o.runs + '"'
+          + ' data-wkts="' + (o.wickets || 0) + '"'
+          + ' data-bowler="' + (o.bowler || '') + '">' + dot + '</div>';
+    html += '<div class="bar-num">O' + o.over + '</div>';
+    html += '<div class="bar-bowler" title="' + (o.bowler || '') + '">' + lastName + '</div>';
+    html += '</div>';
+  }
+  html += '</div></div>';
+  html += '<div class="legend">'
+        + '<div class="leg"><div class="leg-sq" style="background:var(--gold)"></div>Normal over</div>'
+        + '<div class="leg"><div class="leg-sq" style="background:var(--red)"></div>Wicket taken</div>'
+        + '<div class="leg"><div class="leg-sq" style="background:var(--green)"></div>Dot over (0 runs)</div>'
+        + '</div>';
+  return html;
+}
+
+// ── BOWLER TABLE ─────────────────────────────────────────
+function buildBowlerTable(overs) {
+  var map = {};
+  for (var i = 0; i < overs.length; i++) {
+    var b = overs[i].bowler || 'Unknown';
+    if (!map[b]) map[b] = {overs:0, runs:0, wkts:0};
+    map[b].overs++;
+    map[b].runs += overs[i].runs;
+    map[b].wkts += (overs[i].wickets || 0);
+  }
+  var rows = '';
+  var keys = Object.keys(map);
+  for (var i = 0; i < keys.length; i++) {
+    var b = keys[i], s = map[b];
+    var eco = (s.runs / s.overs).toFixed(1);
+    rows += '<tr>'
+          + '<td>' + b + '</td>'
+          + '<td>' + s.overs + '</td>'
+          + '<td>' + s.runs + '</td>'
+          + '<td><strong>' + s.wkts + '</strong></td>'
+          + '<td class="' + ecoClass(eco) + '">' + eco + '</td>'
+          + '</tr>';
+  }
+  return '<div class="table-section">'
+       + '<div class="table-label">Bowler performance</div>'
+       + '<div class="tbl-scroll"><table>'
+       + '<tr><th>Bowler</th><th>Overs</th><th>Runs</th><th>Wkts</th><th>Economy</th></tr>'
+       + rows
+       + '</table></div></div>';
+}
+
+// ── MAIN LOAD ────────────────────────────────────────────
+async function loadMatch() {
+  var el = document.getElementById('content');
+
+  // Read match ID from URL
+  var params = new URLSearchParams(window.location.search);
+  var matchId = params.get('id');
+
+  if (!matchId) {
+    el.innerHTML = '<div class="error-box"><h3>No Match ID</h3><p>The URL is missing a match ID.</p><p>Go back to <a href="matches.html" style="color:var(--gold)">All Matches</a> and click a match.</p></div>';
+    return;
+  }
+
+  // Update breadcrumb
+  document.getElementById('bc-match').textContent = matchId.toUpperCase().replace(/-/g,' ');
+
+  // Try to load JSON — Vercel serves from root, so path is /matches/ID.json
+  var url = 'matches/' + matchId + '.json';
+  var data;
+
+  try {
+    var r = await fetch(url + '?v=' + Date.now());
+    if (!r.ok) {
+      throw new Error('HTTP ' + r.status + ' — File not found: ' + url);
+    }
+    data = await r.json();
+  } catch(err) {
+    el.innerHTML = '<div class="error-box">'
+      + '<h3>Match Not Found</h3>'
+      + '<p>Could not load: <code>' + url + '</code></p>'
+      + '<p style="margin-top:8px"><strong style="color:var(--text)">How to fix this:</strong></p>'
+      + '<p>1. Make sure your JSON file is named exactly: <code>' + matchId + '.json</code></p>'
+      + '<p>2. Make sure it is inside the <code>matches/</code> folder on GitHub.</p>'
+      + '<p>3. Make sure you uploaded it to GitHub and Vercel re-deployed (takes ~30 seconds).</p>'
+      + '<p>4. Check there are no typos — file names are case-sensitive and use hyphens only.</p>'
+      + '<p style="margin-top:10px"><a href="matches.html" style="color:var(--gold)">&#8592; Back to All Matches</a></p>'
+      + '</div>';
+    return;
+  }
+
+  // Update page title and meta for SEO
+  var pageTitle = data.team1 + ' vs ' + data.team2 + ' Bowling Analysis ' + data.date + ' – BowlerStats';
+  document.title = pageTitle;
+  document.querySelector('meta[name="description"]').setAttribute('content',
+    'Over-by-over bowling analysis for ' + data.team1 + ' vs ' + data.team2
+    + ' on ' + data.date + '. Economy rates, wickets, and innings commentary on BowlerStats.'
+  );
+  // Update canonical
+  var canon = document.querySelector('link[rel="canonical"]');
+  if (canon) canon.href = 'https://bowlerstats.vercel.app/match.html?id=' + matchId;
+
+  // Update breadcrumb
+  document.getElementById('bc-match').textContent = data.team1 + ' vs ' + data.team2;
+
+  // Update JSON-LD schema
+  var schema = {
+    "@context":"https://schema.org",
+    "@type":"SportsEvent",
+    "name": data.team1 + " vs " + data.team2 + " – IPL 2025",
+    "sport":"Cricket",
+    "startDate": data.date,
+    "location":{"@type":"Place","name": data.venue || "IPL Venue"},
+    "description": "Bowling analysis for " + data.team1 + " vs " + data.team2,
+    "organizer":{"@type":"Organization","name":"IPL"}
+  };
+  document.getElementById('schema-org').textContent = JSON.stringify(schema);
+
+  // Compute overall stats across all innings
+  var allOvers = [];
+  for (var i = 0; i < data.innings.length; i++) {
+    for (var j = 0; j < data.innings[i].overs.length; j++) {
+      allOvers.push(data.innings[i].overs[j]);
+    }
+  }
+  var s = calcStats(allOvers);
+
+  // Build HTML
+  var html = '<div class="match-card">';
+
+  // Header
+  html += '<div class="match-header">'
+        + '<div class="match-title">' + data.team1 + ' VS ' + data.team2 + '</div>'
+        + '<div class="match-meta">'
+        + (data.venue ? '<span>&#128205; ' + data.venue + '</span>' : '')
+        + (data.date  ? '<span>&#128197; ' + data.date  + '</span>' : '')
+        + '</div>'
+        + (data.result ? '<div><span class="result-badge">' + data.result + '</span></div>' : '')
+        + '</div>';
+
+  // Overall stats bar
+  html += '<div class="stats-row">'
+        + '<div class="stat-box"><div class="stat-val">' + s.runs + '</div><div class="stat-lbl">Total Runs</div></div>'
+        + '<div class="stat-box"><div class="stat-val">' + s.wkts + '</div><div class="stat-lbl">Wickets</div></div>'
+        + '<div class="stat-box"><div class="stat-val">' + s.eco + '</div><div class="stat-lbl">Avg Economy</div></div>'
+        + '<div class="stat-box"><div class="stat-val red">' + s.worst.runs + '<span style="font-size:12px;color:var(--muted)"> O' + s.worst.over + '</span></div><div class="stat-lbl">Worst Over</div></div>'
+        + '</div>';
+
+  // Each innings
+  for (var i = 0; i < data.innings.length; i++) {
+    var inn = data.innings[i];
+    var ordinal = (i === 0) ? '1st' : '2nd';
+
+    if (i > 0) html += '<div class="innings-divider"></div>';
+
+    // Innings header
+    html += '<div class="innings-wrap">'
+          + '<div class="innings-header">'
+          + '<span class="innings-badge">' + ordinal + ' INNINGS</span>'
+          + '<span class="innings-title">' + inn.bowlingTeam + ' bowling vs ' + inn.battingTeam + ' &mdash; ' + inn.overs.length + ' overs'
+          + (inn.totalRuns ? ' &mdash; ' + inn.totalRuns + '/' + (inn.wickets||0) : '')
+          + '</span>'
+          + '</div>'
+          + buildHistogram(inn.overs)
+          + '</div>';
+
+    // Commentary — improved card
+    if (inn.commentary) {
+      html += '<div class="commentary-section">'
+            + '<div class="commentary-card">'
+            + '<div class="commentary-label">&#128172; Innings Commentary</div>'
+            + '<div class="commentary-text">' + inn.commentary + '</div>'
+            + '</div></div>';
+    }
+
+    // Bowler table
+    html += buildBowlerTable(inn.overs);
+  }
+
+  html += '</div>'; // close match-card
+  el.innerHTML = html;
+}
+
+// ── TOOLTIP ──────────────────────────────────────────────
+var tip = document.getElementById('tip');
+
+document.addEventListener('mousemove', function(e) {
+  var bar = e.target.closest ? e.target.closest('.bar-fill') : null;
+  if (bar) {
+    tip.innerHTML = '<strong>Over ' + bar.dataset.over + '</strong>'
+      + 'Runs: ' + bar.dataset.runs + '<br>'
+      + 'Wickets: ' + bar.dataset.wkts + '<br>'
+      + 'Bowler: ' + (bar.dataset.bowler || 'N/A');
+    tip.style.display = 'block';
+    tip.style.left = (e.clientX + 16) + 'px';
+    tip.style.top  = (e.clientY - 12) + 'px';
+    tip.style.transform = '';
+  } else {
+    tip.style.display = 'none';
+  }
+});
+
+// Mobile tap support
+document.addEventListener('click', function(e) {
+  var bar = e.target.closest ? e.target.closest('.bar-fill') : null;
+  if (bar) {
+    tip.innerHTML = '<strong>Over ' + bar.dataset.over + '</strong>'
+      + 'Runs: ' + bar.dataset.runs + '<br>'
+      + 'Wickets: ' + bar.dataset.wkts + '<br>'
+      + 'Bowler: ' + (bar.dataset.bowler || 'N/A');
+    tip.style.display = 'block';
+    tip.style.left = '50%';
+    tip.style.top = '80px';
+    tip.style.transform = 'translateX(-50%)';
+    setTimeout(function(){ tip.style.display = 'none'; }, 3500);
+  }
+});
+
+loadMatch();
+</script>
+</body>
+</html>

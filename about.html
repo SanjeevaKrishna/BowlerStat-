@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About BowlerStats – Cricket's Bowler-First Analysis Site</title>
+<meta name="description" content="BowlerStats is cricket's first website dedicated to bowler performance with over-by-over histograms.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0e1a;--surface:#111827;--card:#1a2235;--border:#253047;--gold:#f5c518;--text:#e2e8f0;--muted:#94a3b8;--green:#22c55e;--red:#ef4444}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+nav{background:var(--surface);border-bottom:2px solid var(--gold);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);text-decoration:none}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:4px}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;padding:6px 10px;border-radius:6px;transition:all .2s}
+.nav-links a:hover,.nav-links a.act{color:var(--gold);background:rgba(245,197,24,.1)}
+.page-hero{background:linear-gradient(135deg,#111827,#0a0e1a);padding:28px 16px;border-bottom:1px solid var(--border);text-align:center}
+.page-hero h1{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:3px}
+.page-hero p{color:var(--muted);font-size:13px;margin-top:6px;max-width:480px;margin-left:auto;margin-right:auto}
+main{max-width:700px;margin:0 auto;padding:20px 16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px}
+h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--gold);margin-bottom:10px}
+p{color:var(--muted);line-height:1.7;font-size:13px;margin-bottom:10px}
+p:last-child{margin-bottom:0}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:12px}
+.feat{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center}
+.feat-icon{font-size:24px;margin-bottom:6px}
+.feat-title{font-weight:700;font-size:12px;color:var(--text);margin-bottom:3px}
+.feat-desc{font-size:11px;color:var(--muted)}
+.color-gold{color:var(--gold);font-weight:700}
+.color-red{color:var(--red);font-weight:700}
+.color-green{color:var(--green);font-weight:700}
+footer{background:var(--surface);border-top:1px solid var(--border);padding:20px 16px;text-align:center;color:var(--muted);font-size:12px;margin-top:40px}
+.foot-links{display:flex;justify-content:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.foot-links a{color:var(--muted);text-decoration:none}
+.foot-links a:hover{color:var(--gold)}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">BOWLER<span>STATS</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="matches.html">Matches</a>
+    <a href="about.html" class="act">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+<div class="page-hero">
+  <h1>ABOUT BOWLERSTATS</h1>
+  <p>Cricket's first stats site that puts bowlers in the spotlight — where they belong.</p>
+</div>
+<main>
+  <div class="card">
+    <h2>Our Story</h2>
+    <p>Every cricket website focuses on batting scorecards. Who hit sixes, who scored centuries. But what about the bowlers who defend those totals? The ones who take wickets at critical moments?</p>
+    <p>BowlerStats was created to change that. Our over-by-over histograms make it instantly clear which overs were expensive, which bowlers took wickets, and how the bowling attack performed as a unit. Plus every innings has a commentary section with our analysis.</p>
+    <p>Built for IPL fans on mobile who want real bowling insight.</p>
+  </div>
+  <div class="card">
+    <h2>What We Offer</h2>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-icon">📊</div><div class="feat-title">Over-by-Over Histograms</div><div class="feat-desc">Every over shown visually with runs, wickets and bowler name</div></div>
+      <div class="feat"><div class="feat-icon">💬</div><div class="feat-title">Innings Commentary</div><div class="feat-desc">Expert analysis written for every innings of every match</div></div>
+      <div class="feat"><div class="feat-icon">🔴</div><div class="feat-title">Live Match</div><div class="feat-desc">Bowling figures updated over by over during IPL matches</div></div>
+      <div class="feat"><div class="feat-icon">📱</div><div class="feat-title">Mobile First</div><div class="feat-desc">Designed for phones — how you actually watch cricket</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>How to Read the Histogram</h2>
+    <p><span class="color-gold">■ Gold bars</span> — normal overs (runs conceded, no wicket)</p>
+    <p><span class="color-red">■ Red bars</span> — wicket overs (a wicket fell; red dot on top of bar)</p>
+    <p><span class="color-green">■ Green bars</span> — dot overs (zero runs — excellent bowling!)</p>
+    <p>Taller bars mean more expensive overs. Tap any bar on mobile to see full details: bowler name, exact runs, and wickets.</p>
+    <p>Below each histogram is a <strong style="color:var(--text)">Bowler Summary table</strong> showing each bowler's total overs, runs, wickets, and economy rate for that innings.</p>
+  </div>
+</main>
+<footer>
+  <div class="foot-links">
+    <a href="index.html">Home</a>
+    <a href="matches.html">Matches</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+  <p>© 2025 BowlerStats &middot; bowlerstat@gmail.com</p>
+</footer>
+</body>
+</html>
