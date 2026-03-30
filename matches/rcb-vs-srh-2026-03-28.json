@@ -1,0 +1,65 @@
+{
+  "matchId": "rcb-vs-srh-2026-03-28",
+  "status": "completed",
+  "team1": "RCB",
+  "team2": "SRH",
+  "venue": "M. Chinnaswamy Stadium, Bangalore",
+  "date": "2026-03-28",
+  "result": "RCB WON",
+  "innings": [
+    {
+      "battingTeam": "SRH",
+      "bowlingTeam": "RCB",
+      "totalRuns": 201,
+      "wickets": 9,
+      "commentary": "RCB bowled very well in the first half. Srh Struggled by Rcb Bowling. However SRH's lower order hit some big shots in overs 17-19 to push past 200.",
+      "overs": [
+        { "over": 1,  "runs": 9, "wickets": 0, "bowler": "Jacob Duffy" },
+        { "over": 2,  "runs": 9,  "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 3,  "runs": 5, "wickets": 2, "bowler": "Jacob Duffy" },
+        { "over": 4,  "runs": 6,  "wickets": 0, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 5,  "runs": 6,  "wickets": 1, "bowler": "Romario Shepherd" },
+        { "over": 6,  "runs": 13, "wickets": 0, "bowler": "Abhinandan Singh" },
+        { "over": 7,  "runs": 8, "wickets": 0, "bowler": "Suyash Sharma" },
+        { "over": 8,  "runs": 9,  "wickets": 0, "bowler": "Krunal Pandey" },
+        { "over": 9,  "runs": 9, "wickets": 0, "bowler": "Suyash Sharma" },
+        { "over": 10, "runs": 13,  "wickets": 0, "bowler": "Krunal Pandey" },
+        { "over": 11, "runs": 5, "wickets": 0, "bowler": "Abhinandan Singh" },
+        { "over": 12, "runs": 13,  "wickets": 0, "bowler": "Romario Shepherd" },
+        { "over": 13, "runs": 21,  "wickets": 0, "bowler": "Abhinandan Singh" },
+        { "over": 14, "runs": 9, "wickets": 1, "bowler": "Romario Shepherd" },
+        { "over": 15, "runs": 7,  "wickets": 1, "bowler": "Suyash Sharma" },
+        { "over": 16, "runs": 13, "wickets": 1, "bowler": "Jacob Duffy" },
+        { "over": 17, "runs": 12, "wickets": 1, "bowler": "Bhuvneshwar Kumar" },
+        { "over": 18, "runs": 8, "wickets": 1, "bowler": "Jacob Duffy" },
+        { "over": 19, "runs": 17, "wickets": 1, "bowler": "Romario Shepherd" },
+        { "over": 20, "runs": 9,  "wickets": 0, "bowler": "Bhuvneshwar Kumar" }
+      ]
+    },
+    {
+      "battingTeam": "RCB",
+      "bowlingTeam": "SRH",
+      "totalRuns": 203,
+      "wickets": 4,
+      "commentary": "SRH made it! RCB needed 202 to win the match and Rcb chased it down in just 15.4 overs.Today Srh Bowlers Struggled alot and we can find the Impact of not having Pat Cummins",
+      "overs": [
+        { "over": 1,  "runs": 9, "wickets": 0, "bowler": "Nitish Kumar Reddy" },
+        { "over": 2,  "runs": 6, "wickets": 1, "bowler": "Jaydev Unadkat" },
+        { "over": 3,  "runs": 13, "wickets": 0, "bowler": "David Payne" },
+        { "over": 4,  "runs": 14,  "wickets": 0, "bowler": "Nitish Kumar Reddy" },
+        { "over": 5,  "runs": 16,  "wickets": 0, "bowler": "Jaydev Unadkat" },
+        { "over": 6,  "runs": 14,  "wickets": 0, "bowler": "Harsh Dubey" },
+        { "over": 7,  "runs": 16,  "wickets": 0, "bowler": "David Payne" },
+        { "over": 8,  "runs": 14,  "wickets": 0, "bowler": "Harsh Dubey" },
+        { "over": 9,  "runs": 12,  "wickets": 1, "bowler": "Harsh Dubey" },
+        { "over": 10, "runs": 14,  "wickets": 0, "bowler": "Jaydev Unadkat" },
+        { "over": 11, "runs": 12,  "wickets": 0, "bowler": "David Payne" },
+        { "over": 12, "runs": 15, "wickets": 0, "bowler": "Nitish Kumar Reddy" },
+        { "over": 13, "runs": 10, "wickets": 2, "bowler": "David Payne" },
+        { "over": 14, "runs": 13,  "wickets": 0, "bowler": "Harsh Dubey" },
+        { "over": 15, "runs": 16,  "wickets": 0, "bowler": "David Payne" },
+        { "over": 16, "runs": 9,  "wickets": 0, "bowler": "Jaydev Unadkat" },   
+      ]
+    }
+  ]
+}
