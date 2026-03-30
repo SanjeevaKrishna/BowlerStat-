@@ -10,6 +10,15 @@
       "file": "rcb-vs-mi-2025-04-15.json"
     },
     {
+      "matchId": "rr-vs-kkr-2026-03-30",
+      "status": "completed",
+      "team1": "RR",
+      "team2": "kkr",
+      "date": "2026-03-30",
+      "result": "RR WON BY 25 RUNS",
+      "file": "rr-vs-kkr-2026-03-30.json"
+    },
+    {
       "matchId": "rcb-vs-csk-2025-04-15",
       "status": "completed",
       "team1": "RCB",
